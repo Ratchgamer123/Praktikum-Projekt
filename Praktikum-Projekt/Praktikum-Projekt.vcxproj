@@ -153,22 +153,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shaderClass.cpp" />
+    <ClCompile Include="stb.cpp" />
+    <ClCompile Include="texture.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.frag" />
-    <None Include="default.vert" />
+    <None Include="fragmentShader.frag" />
+    <None Include="vertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="shaderClass.h" />
+    <ClInclude Include="texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="green_tiles.png" />
+    <Image Include="Tiles084_1K_Color.png" />
+    <Image Include="tiles_color.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
