@@ -1,9 +1,18 @@
 ﻿  main.cpp
-C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\main.cpp(102,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\main.cpp(181,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  1 of 677 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 679 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
+camera.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+EBO.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+glad.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+shader.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+stb.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+VAO.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+VBO.obj : warning LNK4204: 'C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+glfw3.lib(osmesa_context.obj) : warning LNK4020: a type record in 'c:\users\traut\desktop\praktikum-projekt\praktikum-projekt\x64\release\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
+kernel32.lib(KERNEL32.dll) : warning LNK4020: a type record in 'c:\users\traut\desktop\praktikum-projekt\praktikum-projekt\x64\release\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
   Praktikum-Projekt.vcxproj -> C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\Praktikum-Projekt.exe

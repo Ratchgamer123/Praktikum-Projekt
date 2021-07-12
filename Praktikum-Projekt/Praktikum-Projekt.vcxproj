@@ -164,8 +164,10 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragmentShader.frag" />
-    <None Include="vertexShader.vert" />
+    <None Include="main.frag" />
+    <None Include="light.frag" />
+    <None Include="light.vert" />
+    <None Include="main.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -177,7 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="green_tiles.png" />
+    <Image Include="Tiles084_1K_AmbientOcclusion.png" />
     <Image Include="Tiles084_1K_Color.png" />
+    <Image Include="Tiles084_1K_Roughness.png" />
     <Image Include="tiles_color.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>

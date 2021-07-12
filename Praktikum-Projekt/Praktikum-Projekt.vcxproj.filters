@@ -50,10 +50,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertexShader.vert">
+    <None Include="main.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="fragmentShader.frag">
+    <None Include="main.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="light.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="light.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
@@ -85,6 +91,12 @@
       <Filter>Resource Files\Textures</Filter>
     </Image>
     <Image Include="Tiles084_1K_Color.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Tiles084_1K_Roughness.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Tiles084_1K_AmbientOcclusion.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>
