@@ -1,10 +1,8 @@
-﻿  camera.cpp
-C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\camera.cpp(25,20): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
-  main.cpp
+﻿  main.cpp
 C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\main.cpp(102,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  2 of 677 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  1 of 677 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

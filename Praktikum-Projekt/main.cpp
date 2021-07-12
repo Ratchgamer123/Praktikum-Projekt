@@ -7,7 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //Fürs Shader-Organisieren:
-#include "shaderClass.h"
+#include "shader.h"
 #include "VAO.h"
 #include "VBO.h"
 #include "EBO.h"
@@ -118,7 +118,7 @@ int main()
 		shaderProgram.Activate(); //Dieses Shader-Prgramm wird jetzt genutzt
 
 		
-		camera.Matrix(50.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+		camera.Matrix(50.0f, 0.01f, 100.0f, shaderProgram, "camMatrix");
 
 		tiles.Bind(); // Textur wird gelinkt
 		VAO1.Bind(); //Binden, damit OpenGL weiß, welches es verwenden muss
