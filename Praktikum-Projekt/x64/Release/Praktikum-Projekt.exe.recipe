@@ -2,12 +2,12 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\Praktikum-Projekt.exe</FullPath>
+      <FullPath>C:\Users\Maximilian\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Release\Praktikum-Projekt.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\tiles_color.png</FullPath>
+      <FullPath>C:\Users\Maximilian\Desktop\Praktikum-Projekt\Praktikum-Projekt\tiles_color.png</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

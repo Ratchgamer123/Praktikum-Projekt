@@ -179,6 +179,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="green_tiles.png" />
+    <Image Include="Marble016_1K_Color.png" />
+    <Image Include="Marble016_1K_Roughness.png" />
+    <Image Include="planks.png" />
+    <Image Include="planksSpec.png" />
     <Image Include="Tiles084_1K_AmbientOcclusion.png" />
     <Image Include="Tiles084_1K_Color.png" />
     <Image Include="Tiles084_1K_Roughness.png" />

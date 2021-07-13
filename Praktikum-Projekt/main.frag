@@ -1,4 +1,4 @@
-#version 460 core
+#version 450 core
 out vec4 fragColor;
 
 in vec3 color;
@@ -16,18 +16,17 @@ uniform vec3 camPos;
 
 void main()
 {
-	float ambientLight = 0.2;
+	float ambient = 0.20f;
 
-	vec3 normal = normalize(normal);
+	vec3 normals = normalize(normal);
 	vec3 lightDirection = normalize(lightPos - crntPos);
+	float diffuse = max(dot(normals, lightDirection), 0.0f);
 
-	float diffuse = max(dot(normal, lightDirection), 0.0);
-
-	float specularLight = 0.5;
+	float specularLight = 0.5f;
 	vec3 viewDirection = normalize(camPos - crntPos);
-	vec3 reflectionDirection = reflect(-lightDirection, normal);
-	float specularAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0), 16);
-	float specular = specularAmount * specularLight;
+	vec3 reflectionDirection = reflect(-lightDirection, normals);
+	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 16);
+	float specular = specAmount * specularLight;
 
-	fragColor = texture(tex0, texCoord) * lightColor * (diffuse + ambientLight) + texture(tex1, texCoord).r * specular;
+	fragColor = (texture(tex0, texCoord) * (diffuse + ambient) + texture(tex1, texCoord).r * specular) * lightColor;
 }

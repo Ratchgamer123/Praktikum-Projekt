@@ -26,7 +26,7 @@ int main()
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //Hauptversion
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); //Nebenversion
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5); //Nebenversion
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* window = glfwCreateWindow(width, height, "Praktikum-Projekt", NULL, NULL); //Fenster wird erstellt
@@ -47,37 +47,17 @@ int main()
 	
 
 	GLfloat vertices[] = //Koordinaten von einem Dreieck
-	{							//---Farben---//	   //-Mapping-//
-		-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,      0.0f, -1.0f, 0.0f, 
-		-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 5.0f,      0.0f, -1.0f, 0.0f, 
-		 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 5.0f,      0.0f, -1.0f, 0.0f, 
-		 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.0f, -1.0f, 0.0f, 
-
-		-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,     -0.8f, 0.5f,  0.0f, 
-		-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,     -0.8f, 0.5f,  0.0f, 
-		 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,     -0.8f, 0.5f,  0.0f, 
-
-		-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.0f, 0.5f, -0.8f, 
-		 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,      0.0f, 0.5f, -0.8f, 
-		 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,      0.0f, 0.5f, -0.8f, 
-
-		 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,      0.8f, 0.5f,  0.0f, 
-		 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.8f, 0.5f,  0.0f, 
-		 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,      0.8f, 0.5f,  0.0f, 
-
-		 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.0f, 0.5f,  0.8f, 
-		-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,      0.0f, 0.5f,  0.8f, 
-		 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,      0.0f, 0.5f,  0.8f  
+	{							//---Farben---//	   //-Mapping-// 
+		-1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 1.0f, 0.0f,
+		-1.0f, 0.0f, -1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 1.0f, 0.0f,
+		 1.0f, 0.0f, -1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f,
+		 1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f
 	};
 
 	GLuint indices[] =
 	{
-		0, 1, 2, 
-		0, 2, 3,
-		4, 6, 5, 
-		7, 9, 8, 
-		10, 12, 11, 
-		13, 15, 14
+		0, 1, 2,
+		0, 2, 3
 	};
 
 	GLfloat lightVertices[] =
@@ -133,7 +113,7 @@ int main()
 	VBO lightVBO(lightVertices, sizeof(lightVertices));
 	EBO lightEBO(lightIndices, sizeof(lightIndices));
 
-	lightVAO.LinkAttribute(lightVBO, 0, 3, GL_FLOAT, 3* sizeof(float), (void*)0);
+	lightVAO.LinkAttribute(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 
 	lightVAO.Unbind();
 	lightVBO.Unbind();
@@ -142,7 +122,7 @@ int main()
 
 	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
-	glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
+	glm::vec3 lightPos = glm::vec3(0.7f, 0.4f, 0.7f);
 	glm::mat4 lightModelMatrix = glm::mat4(1.0f);
 	lightModelMatrix = glm::translate(lightModelMatrix, lightPos);
 
@@ -159,14 +139,14 @@ int main()
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 	
 	//Textur
-	Texture tiles("Tiles084_1K_Color.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tiles("planks.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
 	tiles.texUnit(shaderProgram, "tex0", 0);
-	Texture tilesSpecular("Tiles084_1K_AmbientOcclusion.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
+	Texture tilesSpecular("planksSpec.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
 	tilesSpecular.texUnit(shaderProgram, "tex1", 1);
 
 	glEnable(GL_DEPTH_TEST);
 
-	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+	Camera camera(width, height, glm::vec3(0.0f, 1.0f, 2.0f));
 
 	glfwSwapInterval(0);
 
@@ -193,7 +173,7 @@ int main()
 		}
 		
 		glClearColor(0.1f, 0.16f, 0.16f, 1.0f); //Färbt den Bereich in dieser Farbe
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Erstellen vom Buffer
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Löschen vom Front-Buffer
 
 		camera.updateMatrix(50.0f, 0.01f, 100.0f);
 		shaderProgram.Activate(); //Dieses Shader-Prgramm wird jetzt genutzt
@@ -202,6 +182,7 @@ int main()
 
 		tiles.Bind(); // Textur wird gelinkt
 		tilesSpecular.Bind();
+		//tilesSpecular.Bind();
 		VAO1.Bind(); //Binden, damit OpenGL weiß, welches es verwenden muss
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
@@ -218,7 +199,13 @@ int main()
 	VBO1.Delete();
 	EBO1.Delete();
 	tiles.Delete();
+	tilesSpecular.Delete();
 	shaderProgram.Delete();
+	lightVAO.Delete();
+	lightVBO.Delete();
+	lightEBO.Delete();
+	lightShader.Delete();
+	
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

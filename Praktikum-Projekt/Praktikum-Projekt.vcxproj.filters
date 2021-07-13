@@ -99,5 +99,17 @@
     <Image Include="Tiles084_1K_AmbientOcclusion.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+    <Image Include="planksSpec.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="planks.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Marble016_1K_Color.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Marble016_1K_Roughness.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
