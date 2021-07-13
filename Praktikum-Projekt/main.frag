@@ -1,13 +1,13 @@
 #version 450 core
 out vec4 fragColor;
 
+in vec3 crntPos;
+in vec3 normal;
 in vec3 color;
 in vec2 texCoord;
-in vec3 normal;
-in vec3 crntPos;
 
-uniform sampler2D tex0;
-uniform sampler2D tex1;
+uniform sampler2D diffuse0;
+uniform sampler2D specular0;
 
 uniform vec4 lightColor;
 
@@ -28,5 +28,5 @@ void main()
 	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 16);
 	float specular = specAmount * specularLight;
 
-	fragColor = (texture(tex0, texCoord) * (diffuse + ambient) + texture(tex1, texCoord).r * specular) * lightColor;
+	fragColor = (texture(diffuse0, texCoord) * (diffuse + ambient) + texture(specular0, texCoord).r * specular) * lightColor;
 }

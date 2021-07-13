@@ -157,6 +157,8 @@
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="model.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -164,6 +166,7 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cube.gltf" />
     <None Include="main.frag" />
     <None Include="light.frag" />
     <None Include="light.vert" />
@@ -172,6 +175,8 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="EBO.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="model.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="VAO.h" />

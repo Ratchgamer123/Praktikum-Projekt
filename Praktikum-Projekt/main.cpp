@@ -1,21 +1,4 @@
-#include <iostream>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <stb/stb_image.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-//Fürs Shader-Organisieren:
-#include "shader.h"
-#include "VAO.h"
-#include "VBO.h"
-#include "EBO.h"
-
-#include "camera.h"
-
-//Texturen
-#include "texture.h"
+#include "model.h"
 
 //Variablen
 const unsigned int width = 1024;
@@ -44,109 +27,23 @@ int main()
 
 	glViewport(0, 0, width, height); //Größe des Erstellten Bildes von OpenGL, am besten nimmt man die Auflösung des Fensters(muss noch flexibel gemacht werden)
 	
-	
-
-	GLfloat vertices[] = //Koordinaten von einem Dreieck
-	{							//---Farben---//	   //-Mapping-// 
-		-1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 1.0f, 0.0f,
-		-1.0f, 0.0f, -1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 1.0f, 0.0f,
-		 1.0f, 0.0f, -1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f,
-		 1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f
-	};
-
-	GLuint indices[] =
-	{
-		0, 1, 2,
-		0, 2, 3
-	};
-
-	GLfloat lightVertices[] =
-	{
-		-0.1f, -0.1f,  0.1f,
-		-0.1f, -0.1f, -0.1f,
-		 0.1f, -0.1f, -0.1f,
-		 0.1f, -0.1f,  0.1f,
-		-0.1f,  0.1f,  0.1f,
-		-0.1f,  0.1f, -0.1f,
-		 0.1f,  0.1f, -0.1f,
-		 0.1f,  0.1f,  0.1f,
-	};
-
-	GLuint lightIndices[] =
-	{
-		0, 1, 2,
-		0, 2, 3,
-		0, 4, 7,
-		0, 7, 3,
-		3, 7, 6,
-		3, 6, 2,
-		2, 6, 5,
-		2, 5, 1,
-		1, 5, 4,
-		1, 4, 0,
-		4, 5, 6,
-		4, 6, 7
-	};
 	//Shader-Programm erstellen; siehe shaderClass.h/.cpp
 	Shader shaderProgram("main.vert", "main.frag");
-	//VAO erstellen und binden
-	VAO VAO1;
-	VAO1.Bind();
-	//VBO und EBO erstellen
-	VBO VBO1(vertices, sizeof(vertices));
-	EBO EBO1(indices, sizeof(indices));
-
-	//VAO zum VBO linken(verbinden) und die Objekte wieder entlinken, damit man sich nicht wieder auf sie bezieht
-	VAO1.LinkAttribute(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	VAO1.LinkAttribute(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-	VAO1.LinkAttribute(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	VAO1.LinkAttribute(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
-
-	Shader lightShader("light.vert", "light.frag");
-
-	VAO lightVAO;
-	lightVAO.Bind();
-
-	VBO lightVBO(lightVertices, sizeof(lightVertices));
-	EBO lightEBO(lightIndices, sizeof(lightIndices));
-
-	lightVAO.LinkAttribute(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-
-	lightVAO.Unbind();
-	lightVBO.Unbind();
-	lightEBO.Unbind();
-
 
 	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-
 	glm::vec3 lightPos = glm::vec3(0.7f, 0.4f, 0.7f);
 	glm::mat4 lightModelMatrix = glm::mat4(1.0f);
 	lightModelMatrix = glm::translate(lightModelMatrix, lightPos);
 
-	glm::vec3 pyramidPos = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::mat4 pyramidModelMatrix = glm::mat4(1.0f);
-	pyramidModelMatrix = glm::translate(pyramidModelMatrix, pyramidPos);
-
-	lightShader.Activate();
-	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "modelMatrix"), 1, GL_FALSE, glm::value_ptr(lightModelMatrix));
-	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	shaderProgram.Activate();
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "modelMatrix"), 1, GL_FALSE, glm::value_ptr(pyramidModelMatrix));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
-	
-	//Textur
-	Texture tiles("planks.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
-	tiles.texUnit(shaderProgram, "tex0", 0);
-	Texture tilesSpecular("planksSpec.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
-	tilesSpecular.texUnit(shaderProgram, "tex1", 1);
 
 	glEnable(GL_DEPTH_TEST);
 
-	Camera camera(width, height, glm::vec3(0.0f, 1.0f, 2.0f));
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+
+	Model model("Models/sword/scene.gltf");
 
 	glfwSwapInterval(0);
 
@@ -176,35 +73,16 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Löschen vom Front-Buffer
 
 		camera.updateMatrix(50.0f, 0.01f, 100.0f);
-		shaderProgram.Activate(); //Dieses Shader-Prgramm wird jetzt genutzt
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(shaderProgram, "camMatrix");
+		
+		model.Draw(shaderProgram, camera);
 
-		tiles.Bind(); // Textur wird gelinkt
-		tilesSpecular.Bind();
-		//tilesSpecular.Bind();
-		VAO1.Bind(); //Binden, damit OpenGL weiß, welches es verwenden muss
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		lightShader.Activate();
-		camera.Matrix(lightShader, "camMatrix");
-		lightVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(float), GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(window); //Letzten Frame(schwarz, auch Buffer) durch neuen Frame(Buffer) ersetzen
 		glfwPollEvents(); //Damit das Fenster auf Eingaben reagiert
 	}
 
 	//Löschung der erstellten Elemente nach dem Schließen
-	VAO1.Delete();
-	VBO1.Delete();
-	EBO1.Delete();
-	tiles.Delete();
-	tilesSpecular.Delete();
 	shaderProgram.Delete();
-	lightVAO.Delete();
-	lightVBO.Delete();
-	lightEBO.Delete();
-	lightShader.Delete();
+	
 	
 
 	glfwDestroyWindow(window);
