@@ -1,12 +1,13 @@
 #ifndef MODEL_CLASS_H
 #define MODEL_CLASS_H
 
-#include <json/json.hpp>
-#include "mesh.h"
+#include<json/json.hpp>
+#include"mesh.h"
 
 using json = nlohmann::json;
 
-class Model 
+
+class Model
 {
 	public:
 		Model(const char* file);
@@ -14,23 +15,26 @@ class Model
 		void Draw(Shader& shader, Camera& camera);
 
 	private:
+	
 		const char* file;
 		std::vector<unsigned char> data;
 		json JSON;
 
 		std::vector<Mesh> meshes;
-		std::vector<glm::vec3> meshTranslations;
-		std::vector<glm::quat> meshRotations;
-		std::vector<glm::vec3> meshScales;
-		std::vector<glm::mat4> meshMatrices;
+		std::vector<glm::vec3> translationsMeshes;
+		std::vector<glm::quat> rotationsMeshes;
+		std::vector<glm::vec3> scalesMeshes;
+		std::vector<glm::mat4> matricesMeshes;
 
 		std::vector<std::string> loadedTexName;
 		std::vector<Texture> loadedTex;
 
 		void loadMesh(unsigned int indMesh);
+
 		void traverseNode(unsigned int nextNode, glm::mat4 matrix = glm::mat4(1.0f));
 
 		std::vector<unsigned char> getData();
+	
 		std::vector<float> getFloats(json accessor);
 		std::vector<GLuint> getIndices(json accessor);
 		std::vector<Texture> getTextures();
@@ -47,4 +51,3 @@ class Model
 		std::vector<glm::vec4> groupFloatsVec4(std::vector<float> floatVec);
 };
 #endif
-

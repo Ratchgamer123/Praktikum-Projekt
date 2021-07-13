@@ -43,7 +43,7 @@ int main()
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
-	Model model("Models/sword/scene.gltf");
+	Model model("Models/penis.gltf");
 
 	glfwSwapInterval(0);
 

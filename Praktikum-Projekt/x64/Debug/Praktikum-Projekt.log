@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\main.cpp(58,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Praktikum-Projekt.vcxproj -> C:\Users\traut\Desktop\Praktikum-Projekt\Praktikum-Projekt\x64\Debug\Praktikum-Projekt.exe

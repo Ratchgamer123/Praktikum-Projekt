@@ -13,15 +13,14 @@ Model::Model(const char* file)
 
 void Model::Draw(Shader& shader, Camera& camera)
 {
-	for (unsigned int i = 0; i < meshes.size(); i++) 
+	for (unsigned int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i].Mesh::Draw(shader, camera, meshMatrices[i]);
+		meshes[i].Mesh::Draw(shader, camera, matricesMeshes[i]);
 	}
 }
 
 void Model::loadMesh(unsigned int indMesh)
 {
-	
 	unsigned int posAccInd = JSON["meshes"][indMesh]["primitives"][0]["attributes"]["POSITION"];
 	unsigned int normalAccInd = JSON["meshes"][indMesh]["primitives"][0]["attributes"]["NORMAL"];
 	unsigned int texAccInd = JSON["meshes"][indMesh]["primitives"][0]["attributes"]["TEXCOORD_0"];
@@ -43,21 +42,17 @@ void Model::loadMesh(unsigned int indMesh)
 
 void Model::traverseNode(unsigned int nextNode, glm::mat4 matrix)
 {
-	// Derzeitige Node
 	json node = JSON["nodes"][nextNode];
 
-	// Position speichern, falls sie existiert
 	glm::vec3 translation = glm::vec3(0.0f, 0.0f, 0.0f);
 	if (node.find("translation") != node.end())
 	{
 		float transValues[3];
 		for (unsigned int i = 0; i < node["translation"].size(); i++)
-		{
 			transValues[i] = (node["translation"][i]);
-		}
 		translation = glm::make_vec3(transValues);
 	}
-	// Die Rotation speichern, falls sie existiert
+
 	glm::quat rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 	if (node.find("rotation") != node.end())
 	{
@@ -70,7 +65,7 @@ void Model::traverseNode(unsigned int nextNode, glm::mat4 matrix)
 		};
 		rotation = glm::make_quat(rotValues);
 	}
-	// Speichere die Skalierung, falls sie existiert
+
 	glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	if (node.find("scale") != node.end())
 	{
@@ -79,7 +74,7 @@ void Model::traverseNode(unsigned int nextNode, glm::mat4 matrix)
 			scaleValues[i] = (node["scale"][i]);
 		scale = glm::make_vec3(scaleValues);
 	}
-	// Falls die Matrix existiert, soll sie gespeichert werden
+	
 	glm::mat4 matNode = glm::mat4(1.0f);
 	if (node.find("matrix") != node.end())
 	{
@@ -89,31 +84,30 @@ void Model::traverseNode(unsigned int nextNode, glm::mat4 matrix)
 		matNode = glm::make_mat4(matValues);
 	}
 
-	// Intitialisieren
+	
 	glm::mat4 trans = glm::mat4(1.0f);
 	glm::mat4 rot = glm::mat4(1.0f);
 	glm::mat4 sca = glm::mat4(1.0f);
 
-	// In richtige Position bringen
+	
 	trans = glm::translate(trans, translation);
 	rot = glm::mat4_cast(rotation);
 	sca = glm::scale(sca, scale);
 
-	// Multiply all matrices together
+	
 	glm::mat4 matNextNode = matrix * matNode * trans * rot * sca;
 
-	// Wenn die Node ein Mesh enthält = laden
+	
 	if (node.find("mesh") != node.end())
 	{
-		meshTranslations.push_back(translation);
-		meshRotations.push_back(rotation);
-		meshScales.push_back(scale);
-		meshMatrices.push_back(matNextNode);
+		translationsMeshes.push_back(translation);
+		rotationsMeshes.push_back(rotation);
+		scalesMeshes.push_back(scale);
+		matricesMeshes.push_back(matNextNode);
 
 		loadMesh(node["mesh"]);
 	}
 
-	// Nach "Kindern" suchen und das gleiche mit diesen machen
 	if (node.find("children") != node.end())
 	{
 		for (unsigned int i = 0; i < node["children"].size(); i++)
@@ -147,15 +141,14 @@ std::vector<float> Model::getFloats(json accessor)
 	unsigned int byteOffset = bufferView["byteOffset"];
 
 	unsigned int numPerVert;
-	if (type == "SCALAR") { numPerVert = 1; }
-	else if (type == "VEC2") { numPerVert = 2; }
-	else if (type == "VEC3") { numPerVert = 3; }
-	else if (type == "VEC4") { numPerVert = 4; }
-	else throw std::invalid_argument("Typ wird nicht akzeptiert, es funktioniern nur SCALAR, VEC2, VEC3 oder VEC4 Werte.");
+	if (type == "SCALAR") numPerVert = 1;
+	else if (type == "VEC2") numPerVert = 2;
+	else if (type == "VEC3") numPerVert = 3;
+	else if (type == "VEC4") numPerVert = 4;
+	else throw std::invalid_argument("Type is invalid (not SCALAR, VEC2, VEC3, or VEC4)");
 
 	unsigned int beginningOfData = byteOffset + accByteOffset;
 	unsigned int lengthOfData = count * 4 * numPerVert;
-
 	for (unsigned int i = beginningOfData; i < beginningOfData + lengthOfData; i)
 	{
 		unsigned char bytes[] = { data[i++], data[i++], data[i++], data[i++] };
@@ -163,6 +156,7 @@ std::vector<float> Model::getFloats(json accessor)
 		std::memcpy(&value, bytes, sizeof(float));
 		floatVec.push_back(value);
 	}
+
 	return floatVec;
 }
 
@@ -179,9 +173,9 @@ std::vector<GLuint> Model::getIndices(json accessor)
 	unsigned int byteOffset = bufferView["byteOffset"];
 
 	unsigned int beginningOfData = byteOffset + accByteOffset;
-	if (componentType == 5125) 
+	if (componentType == 5125)
 	{
-		for (unsigned int i = beginningOfData; i < byteOffset + accByteOffset + count * 4; i) 
+		for (unsigned int i = beginningOfData; i < byteOffset + accByteOffset + count * 4; i)
 		{
 			unsigned char bytes[] = { data[i++], data[i++], data[i++], data[i++] };
 			unsigned int value;
@@ -189,7 +183,7 @@ std::vector<GLuint> Model::getIndices(json accessor)
 			indices.push_back((GLuint)value);
 		}
 	}
-	else if (componentType == 5123) 
+	else if (componentType == 5123)
 	{
 		for (unsigned int i = beginningOfData; i < byteOffset + accByteOffset + count * 2; i)
 		{
@@ -220,7 +214,7 @@ std::vector<Texture> Model::getTextures()
 	std::string fileStr = std::string(file);
 	std::string fileDirectory = fileStr.substr(0, fileStr.find_last_of('/') + 1);
 
-	for (unsigned int i = 0; i < JSON["image"].size(); i++) 
+	for (unsigned int i = 0; i < JSON["images"].size(); i++)
 	{
 		std::string texPath = JSON["images"][i]["uri"];
 
@@ -234,7 +228,8 @@ std::vector<Texture> Model::getTextures()
 				break;
 			}
 		}
-		if (!skip) 
+
+		if (!skip)
 		{
 			if (texPath.find("baseColor") != std::string::npos)
 			{
@@ -287,7 +282,6 @@ std::vector<glm::vec2> Model::groupFloatsVec2(std::vector<float> floatVec)
 	{
 		vectors.push_back(glm::vec2(floatVec[i++], floatVec[i++]));
 	}
-
 	return vectors;
 }
 std::vector<glm::vec3> Model::groupFloatsVec3(std::vector<float> floatVec)
@@ -297,7 +291,6 @@ std::vector<glm::vec3> Model::groupFloatsVec3(std::vector<float> floatVec)
 	{
 		vectors.push_back(glm::vec3(floatVec[i++], floatVec[i++], floatVec[i++]));
 	}
-
 	return vectors;
 }
 std::vector<glm::vec4> Model::groupFloatsVec4(std::vector<float> floatVec)
@@ -307,7 +300,6 @@ std::vector<glm::vec4> Model::groupFloatsVec4(std::vector<float> floatVec)
 	{
 		vectors.push_back(glm::vec4(floatVec[i++], floatVec[i++], floatVec[i++], floatVec[i++]));
 	}
-
 	return vectors;
 }
  
