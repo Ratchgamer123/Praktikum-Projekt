@@ -46,7 +46,7 @@ vec4 direcLight()
 
 	vec3 normalMap = texture(normalMap0, texCoord).rgb;
 	vec3 normal = normalize(Normal + normalMap * 2.0 - 1.0);
-	vec3 lightDirection = normalize(vec3(1.0f, 1.0f, 0.0f));
+	vec3 lightDirection = normalize(vec3(-2.0f, -2.0f, 0.0f));
 	float diffuse = max(dot(normal, lightDirection), 0.0f);
 
 	float specularLight = 0.50f;

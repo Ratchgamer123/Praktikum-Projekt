@@ -24,9 +24,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,6 +51,9 @@
     <ClCompile Include="model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="main.vert">
@@ -66,6 +66,12 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="light.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="skybox.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="skybox.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
@@ -121,6 +127,24 @@
       <Filter>Resource Files\Textures</Filter>
     </Image>
     <Image Include="Marble016_1K_Roughness.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="SkyboxTextures\pz.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="SkyboxTextures\nx.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="SkyboxTextures\ny.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="SkyboxTextures\nz.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="SkyboxTextures\px.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="SkyboxTextures\py.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>

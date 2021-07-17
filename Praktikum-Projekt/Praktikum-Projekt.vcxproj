@@ -149,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)OpenGL Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mtd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -170,6 +170,8 @@
     <None Include="light.frag" />
     <None Include="light.vert" />
     <None Include="main.vert" />
+    <None Include="skybox.frag" />
+    <None Include="skybox.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -187,6 +189,12 @@
     <Image Include="Marble016_1K_Roughness.png" />
     <Image Include="planks.png" />
     <Image Include="planksSpec.png" />
+    <Image Include="SkyboxTextures\nx.png" />
+    <Image Include="SkyboxTextures\ny.png" />
+    <Image Include="SkyboxTextures\nz.png" />
+    <Image Include="SkyboxTextures\px.png" />
+    <Image Include="SkyboxTextures\py.png" />
+    <Image Include="SkyboxTextures\pz.png" />
     <Image Include="Tiles084_1K_AmbientOcclusion.png" />
     <Image Include="Tiles084_1K_Color.png" />
     <Image Include="Tiles084_1K_Roughness.png" />
