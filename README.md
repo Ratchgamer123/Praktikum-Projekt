@@ -1,2 +1,2 @@
 # Praktikum-Projekt
-Dieses Repository beinhaltet den geschrieben Code des Projektes.Bald wird alles auf Englisch sein. OpenGL und C++(GLFW || Dear ImGui).
+OpenGL (GLFW || Dear ImGui) 3D-Rendering. Written in C++.
